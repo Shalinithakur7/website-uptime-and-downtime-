@@ -1,0 +1,34 @@
+name: Streamlit Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Test Streamlit run
+      run: |
+        streamlit run app.py --server.headless true &
+        sleep 10
+        pkill -f streamlit
+
+    # Deployment step is handled automatically when repo is connected to Streamlit Community Cloud
+
+    
