@@ -29,6 +29,5 @@ jobs:
         sleep 10
         pkill -f streamlit
 
-    # Deployment step is handled automatically when repo is connected to Streamlit Community Cloud
 
     
